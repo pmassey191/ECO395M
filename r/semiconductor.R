@@ -1,6 +1,6 @@
 library(gamlr)
 
-semiconductor = read.csv("../data/semiconductor.csv")
+semiconductor = read.csv("data/semiconductor.csv")
 n = nrow(semiconductor)
 
 ## full model
@@ -57,6 +57,7 @@ scb.min = coef(sccvl, select="min")
 log(sccvl$lambda.min)
 sum(scb.min!=0) # note: this is random!  because of the CV randomness
 
+predict(sccvl,s=scb.min)
 ## CV 1se selection (the default)
 scb.1se = coef(sccvl)
 log(sccvl$lambda.1se)
@@ -66,7 +67,7 @@ sum(scb.1se!=0) ## usually selects all zeros (just the intercept)
 # note that AIC is a pretty good estimate of out-of-sample deviance
 # for values of lambda near the optimum
 # outside that range: much worse  
-plot(sccvl, bty="n", ylim=c(0, 1))
+plot(sccvl, bty ="n", ylim=c(0, 1))
 lines(log(sclasso$lambda),AICc(sclasso)/n, col="green", lwd=2)
 legend("top", fill=c("blue","green"),
 	legend=c("CV","AICc"), bty="n")

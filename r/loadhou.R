@@ -8,7 +8,7 @@ library(foreach)
 
 # read in the data: make sure to use the path name to
 # wherever you'd stored the file
-loadhou = read.csv('../data/loadhou.csv')
+loadhou = read.csv('data/loadhou.csv')
 summary(loadhou)
 
 # plot the data
